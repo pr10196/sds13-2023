@@ -62,7 +62,7 @@ The correlation coefficient is approximately 0.06, which indicates that there is
 
 
 ```{r, echo=FALSE}
-pr_ggplot + geom_point(data=Project, aes(x=ReviewScore, y=AvgHoursToFinish),  col='purple') + 
+pr_ggplot + geom_point(data=Project, aes(x=ReviewScore, y=AvgHoursToFinish),  col='red') + 
     labs(title='Review Score and Average Hours to Finish', x='Review Score',y='Average Hours to Finish')
 cor(Project$ReviewScore, Project$AvgHoursToFinish)
 ```
