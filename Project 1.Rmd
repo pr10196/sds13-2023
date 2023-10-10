@@ -1,0 +1,81 @@
+---
+title: "SDS 313 Project 1"
+author: "Pranav Rao"
+date: "2023-09-19"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+Project <- read.csv('Project1_videogames.csv')
+library(ggplot2)
+pr_ggplot <- ggplot(Project)
+```
+
+## Question 1
+
+Introduce your dataset and briefly describe the variables it contains, how it was collected, and any relevant background to give your reader context about the variables. Describe which variable is your chosen outcome and which predictors you will be investigating.  Include a picture (with citation) that relates to your analysis.
+
+This dataset contains a list of over a thousand video games which were collected from 2004 to 2010. The data was collected from crowd-sourced data on "How Long to Beat". The variables that are used to describe the movies include Tile, Publisher, Genre, Year, Rating, Console, MaxPlayers, AvgHoursToFinish, Sales, and ReviewScore. The predictor variables that I will be investigating are MaxPlayers, AvgHoursToFinish, and Sales. The outcome variable that I will investigate is ReviewScore.
+
+```{r, echo=FALSE, out.width='50%'}
+library(knitr)
+include_graphics("https://cdn.lifehack.org/wp-content/uploads/2015/04/Gaming-console.jpg")
+```
+
+**cdn.lifehack.org/wp-content/uploads/2015/04/Gaming-console.jpg. Accessed 22 Sept. 2023. **
+
+
+## Question 2
+
+```{r, echo=FALSE}
+mean(Project$ReviewScore)
+sd(Project$ReviewScore)
+median(Project$ReviewScore)
+fivenum(Project$ReviewScore)
+```
+
+```{r, echo=FALSE}
+pr_ggplot + geom_histogram(data=Project, aes(x=ReviewScore), bins = 30, col='green', fill = "orange") + 
+    labs(title='Distribution of the Review Score', x='Review Score')
+```
+
+The distribution of the graph is left-skewed because the median is greater than the mean. The standard deviation is 12.85375. 
+
+
+
+```{r, echo=FALSE}
+pr_ggplot + geom_point(data=Project, aes(x=ReviewScore, y=Sales),  col='red') + 
+    labs(title='Review Score and Sales', x='Review Score',y='Sales')
+cor(Project$ReviewScore, Project$Sales)
+```
+
+The correlation coefficient is approximately 0.3, so this indicates there is a positive, strong correlation between the Review Scores and Sales.
+
+## Question 3
+
+```{r, echo=FALSE}
+pr_ggplot + geom_point(data=Project, aes(x=ReviewScore, y=MaxPlayers),  col='blue') + 
+    labs(title='Review Score and Max Players', x='Review Score',y='Max Players')
+cor(Project$ReviewScore, Project$MaxPlayers)
+```
+The correlation coefficient is approximately 0.06, which indicates that there is a weak, positive correlation between the Review Score and the Max Players.
+
+
+```{r, echo=FALSE}
+pr_ggplot + geom_point(data=Project, aes(x=ReviewScore, y=AvgHoursToFinish),  col='purple') + 
+    labs(title='Review Score and Average Hours to Finish', x='Review Score',y='Average Hours to Finish')
+cor(Project$ReviewScore, Project$AvgHoursToFinish)
+```
+
+The correlation coefficient is approximately 0.21, and this indicates a strong, positive correlation between the Review Score and the Average Hours to Finish. 
+
+
+## Question 4
+
+Based on the results of this report, we can conclude that the distribution of the outcome variable, the Review Score, is left-skewed, and the median of the distribution has a greater value than the mean. The correlation coefficient between the Review Scores and Sales is approximately 0.3, indicating a strong, positive correlation between the two variables. In comparison, the correlation coefficient between the Review Scores and Max Players is approximately 0.06, indicating a weak, positive correlation between the two variables. Lastly, the correlation coefficient between the Review Scores and Average Hours to Finish is approximately 0.21, which also conveys a strong, positive correlation between the two variables. For future research, a new area to collect data in relation to this study is collecting quantitative biometric data. For instance, this study could include variables such as AvgProfanityWords which can take in account the amount of profanity that a player uses while playing a specific game. Therefore, this variable could both positively and negatively impact the AvgHoursToFinish variable due to a considerable amount of breaks that some video games force the player to take due to anger and rage.
+
+**References:**
+
+**cdn.lifehack.org/wp-content/uploads/2015/04/Gaming-console.jpg. Accessed 22 Sept. 2023. **
+
+**“How Do Video Games Collect and Use Data?” Esports Lawyers | Gilbert’s LLP, 3 May 2022, esportslawyers.ca/how-do-video-games-collect-and-use-data#:~:text=There%20are%20three%20major%20categories%20of%20data%20collected,have%20also%20started%20to%20collect%20players%E2%80%99%20geolocation%20data. **
